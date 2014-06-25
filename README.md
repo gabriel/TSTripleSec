@@ -1,7 +1,9 @@
 TripleSec
 ===========
 
-Objective-C implementation for [TripleSec](https://keybase.io/triplesec)
+Objective-C implementation for [TripleSec](https://keybase.io/triplesec). 
+
+See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details on crypto implementations used here.
 
 # Install
 
