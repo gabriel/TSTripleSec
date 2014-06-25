@@ -1,0 +1,23 @@
+PODS:
+  - GHUnit (0.5.9)
+  - libsodium (0.5.0)
+  - NAChloride (1.0.1):
+    - libsodium
+
+DEPENDENCIES:
+  - GHUnit
+  - libsodium (from `../libsodium/libsodium.podspec`)
+  - NAChloride (from `../NAChloride/`)
+
+EXTERNAL SOURCES:
+  libsodium:
+    :path: ../libsodium/libsodium.podspec
+  NAChloride:
+    :path: ../NAChloride/
+
+SPEC CHECKSUMS:
+  GHUnit: 4ea5a83295587ab226c458fc30dfdb1616fba633
+  libsodium: 0c70192d18bc9d475aaa9a877ba0598288f6c72a
+  NAChloride: 07e736fb0fc73219e0c32029e59557e65b2f12e4
+
+COCOAPODS: 0.33.1
