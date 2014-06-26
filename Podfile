@@ -1,7 +1,7 @@
-platform :ios, '8.0'
+platform :ios, '7.0'
 
-pod 'libsodium', :path => "../libsodium/libsodium.podspec"
-pod 'NAChloride', :path => "../NAChloride/"
+pod 'libsodium'
+pod 'NAChloride'
 
 target :Tests do
   pod 'GHUnit'
