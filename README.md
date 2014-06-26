@@ -11,8 +11,6 @@ See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details
 
 ## Podfile
 
-**The podspec isn't deployed, so this won't work yet.**
-
 ```ruby
 platform :ios, "7.0"
 pod "TSTripleSec"
