@@ -13,10 +13,10 @@ See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details
 
 ```ruby
 platform :ios, "7.0"
-pod "TripleSec"
+pod "TSTripleSec"
 ```
 
-# TripleSec
+# TSTripleSec
 
 ```objc
 #import <TSTripleSec/TSTripleSec.h>

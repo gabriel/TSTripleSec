@@ -43,11 +43,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		00095B9B1954C8BF00F550CB /* libTripleSec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTripleSec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		00095B9B1954C8BF00F550CB /* libTSTripleSec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTSTripleSec.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		00095B9E1954C8BF00F550CB /* TSTripleSec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTripleSec.h; sourceTree = "<group>"; };
 		00095BA01954C8BF00F550CB /* TSTripleSec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTripleSec.m; sourceTree = "<group>"; };
 		00095BB51954C8E100F550CB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		000A2054195B8B8000BC626B /* TripleSec.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TripleSec.podspec; sourceTree = "<group>"; };
+		000A2054195B8B8000BC626B /* TSTripleSec.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TSTripleSec.podspec; sourceTree = "<group>"; };
 		000A2055195B8BC100BC626B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		000A2057195B904500BC626B /* vectors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vectors.json; path = Tests/vectors.json; sourceTree = "<group>"; };
 		45D08379AF78414DA47F9C54 /* main.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tests/main.m; sourceTree = "<group>"; };
@@ -85,9 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				000A2055195B8BC100BC626B /* README.md */,
-				000A2054195B8B8000BC626B /* TripleSec.podspec */,
+				000A2054195B8B8000BC626B /* TSTripleSec.podspec */,
 				00095BB51954C8E100F550CB /* Podfile */,
-				00095B9D1954C8BF00F550CB /* TripleSec */,
+				00095B9D1954C8BF00F550CB /* TSTripleSec */,
 				FE31F412567543BE9C04891C /* Tests */,
 				00095B9C1954C8BF00F550CB /* Products */,
 				E4E462B186EA448BBB43FF5E /* Pods.xcconfig */,
@@ -99,19 +99,19 @@
 		00095B9C1954C8BF00F550CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				00095B9B1954C8BF00F550CB /* libTripleSec.a */,
+				00095B9B1954C8BF00F550CB /* libTSTripleSec.a */,
 				E622978CCC6C459DA3D9275E /* Tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00095B9D1954C8BF00F550CB /* TripleSec */ = {
+		00095B9D1954C8BF00F550CB /* TSTripleSec */ = {
 			isa = PBXGroup;
 			children = (
 				00095B9E1954C8BF00F550CB /* TSTripleSec.h */,
 				00095BA01954C8BF00F550CB /* TSTripleSec.m */,
 			);
-			path = TripleSec;
+			path = TSTripleSec;
 			sourceTree = "<group>";
 		};
 		588E08FA8C9C4E9184EE0EA0 /* Frameworks */ = {
@@ -145,9 +145,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00095B9A1954C8BF00F550CB /* TripleSec */ = {
+		00095B9A1954C8BF00F550CB /* TSTripleSec */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00095BAF1954C8BF00F550CB /* Build configuration list for PBXNativeTarget "TripleSec" */;
+			buildConfigurationList = 00095BAF1954C8BF00F550CB /* Build configuration list for PBXNativeTarget "TSTripleSec" */;
 			buildPhases = (
 				286810B2E92543A9AAA2D2EC /* Check Pods Manifest.lock */,
 				00095B971954C8BF00F550CB /* Sources */,
@@ -159,9 +159,9 @@
 			);
 			dependencies = (
 			);
-			name = TripleSec;
+			name = TSTripleSec;
 			productName = TripleSec;
-			productReference = 00095B9B1954C8BF00F550CB /* libTripleSec.a */;
+			productReference = 00095B9B1954C8BF00F550CB /* libTSTripleSec.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		0DDE0B17693E421982A6B847 /* Tests */ = {
@@ -198,7 +198,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 00095B961954C8BF00F550CB /* Build configuration list for PBXProject "TripleSec" */;
+			buildConfigurationList = 00095B961954C8BF00F550CB /* Build configuration list for PBXProject "TSTripleSec" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -210,7 +210,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				00095B9A1954C8BF00F550CB /* TripleSec */,
+				00095B9A1954C8BF00F550CB /* TSTripleSec */,
 				0DDE0B17693E421982A6B847 /* Tests */,
 			);
 		};
@@ -315,7 +315,7 @@
 /* Begin PBXTargetDependency section */
 		53785561EB3F4A458AB9F6DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 00095B9A1954C8BF00F550CB /* TripleSec */;
+			target = 00095B9A1954C8BF00F550CB /* TSTripleSec */;
 			targetProxy = 355FD6AC44CD429DB2303846 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -399,7 +399,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4E462B186EA448BBB43FF5E /* Pods.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TSTripleSec;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -408,7 +408,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E4E462B186EA448BBB43FF5E /* Pods.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TSTripleSec;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -472,7 +472,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00095B961954C8BF00F550CB /* Build configuration list for PBXProject "TripleSec" */ = {
+		00095B961954C8BF00F550CB /* Build configuration list for PBXProject "TSTripleSec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00095BAD1954C8BF00F550CB /* Debug */,
@@ -481,7 +481,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		00095BAF1954C8BF00F550CB /* Build configuration list for PBXNativeTarget "TripleSec" */ = {
+		00095BAF1954C8BF00F550CB /* Build configuration list for PBXNativeTarget "TSTripleSec" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00095BB01954C8BF00F550CB /* Debug */,
