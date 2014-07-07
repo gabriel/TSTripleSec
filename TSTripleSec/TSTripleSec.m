@@ -27,6 +27,7 @@
   NSUInteger totalKeysBytes = HMAC_SHA_512_KEYSIZE + HMAC_SHA3_512_KEYSIZE + XSALSA20_KEYSIZE + TWO_FISH_CTR_KEYSIZE + AES_256_CTR_KEYSIZE;
   NSData *keyMaterial = [NAScrypt scrypt:key salt:salt N:32768U r:8 p:1 length:totalKeysBytes error:error];
   if (!keyMaterial) return nil;
+  NSAssert(totalKeysBytes == [keyMaterial length], @"Size mismatch");
   
   size_t offset = 0;
   NSData *HMACSHA512Key = [NSData na_dataNoCopy:keyMaterial offset:offset length:HMAC_SHA_512_KEYSIZE];
