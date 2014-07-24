@@ -11,6 +11,8 @@
 		00095BA11954C8BF00F550CB /* TSTripleSec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00095BA01954C8BF00F550CB /* TSTripleSec.m */; };
 		000A2056195B8BC100BC626B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 000A2055195B8BC100BC626B /* README.md */; };
 		000A2059195B91B100BC626B /* vectors.json in Resources */ = {isa = PBXBuildFile; fileRef = 000A2057195B904500BC626B /* vectors.json */; };
+		002B4F841980AA9D00DB27E0 /* test_key.hex in Resources */ = {isa = PBXBuildFile; fileRef = 002B4F831980AA9D00DB27E0 /* test_key.hex */; };
+		0057EDFB196C945400F39536 /* test_key.p3skb in Resources */ = {isa = PBXBuildFile; fileRef = 0057EDFA196C945400F39536 /* test_key.p3skb */; };
 		00E14E9D195525A0003CAE8E /* TSTripleSec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00095BA01954C8BF00F550CB /* TSTripleSec.m */; };
 		00FB32B1196610640060AF33 /* P3SKB.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FB32B0196610640060AF33 /* P3SKB.m */; };
 		00FB32B2196610640060AF33 /* P3SKB.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FB32B0196610640060AF33 /* P3SKB.m */; };
@@ -54,9 +56,12 @@
 		000A2054195B8B8000BC626B /* TSTripleSec.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TSTripleSec.podspec; sourceTree = "<group>"; };
 		000A2055195B8BC100BC626B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		000A2057195B904500BC626B /* vectors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vectors.json; path = Tests/vectors.json; sourceTree = "<group>"; };
+		002B4F831980AA9D00DB27E0 /* test_key.hex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_key.hex; path = Tests/test_key.hex; sourceTree = "<group>"; };
+		0057EDFA196C945400F39536 /* test_key.p3skb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_key.p3skb; path = Tests/test_key.p3skb; sourceTree = "<group>"; };
+		0057EDFC196CA48100F39536 /* CHANGES */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES; sourceTree = "<group>"; };
 		00FB32AF196610640060AF33 /* P3SKB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P3SKB.h; sourceTree = "<group>"; };
 		00FB32B0196610640060AF33 /* P3SKB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P3SKB.m; sourceTree = "<group>"; };
-		00FB32BB196617620060AF33 /* P3SKBTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P3SKBTest.m; sourceTree = "<group>"; };
+		00FB32BB196617620060AF33 /* P3SKBTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = P3SKBTest.m; path = Tests/P3SKBTest.m; sourceTree = "<group>"; };
 		45D08379AF78414DA47F9C54 /* main.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tests/main.m; sourceTree = "<group>"; };
 		79CBDC4211564596B38C7641 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91C2CD989B274E3E88623F2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -92,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				000A2055195B8BC100BC626B /* README.md */,
+				0057EDFC196CA48100F39536 /* CHANGES */,
 				000A2054195B8B8000BC626B /* TSTripleSec.podspec */,
 				00095BB51954C8E100F550CB /* Podfile */,
 				00095B9D1954C8BF00F550CB /* TSTripleSec */,
@@ -148,6 +154,8 @@
 				AC928C682FB542BDB1953182 /* TSTripleSecTest.m */,
 				00FB32BB196617620060AF33 /* P3SKBTest.m */,
 				000A2057195B904500BC626B /* vectors.json */,
+				0057EDFA196C945400F39536 /* test_key.p3skb */,
+				002B4F831980AA9D00DB27E0 /* test_key.hex */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -231,7 +239,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002B4F841980AA9D00DB27E0 /* test_key.hex in Resources */,
 				000A2059195B91B100BC626B /* vectors.json in Resources */,
+				0057EDFB196C945400F39536 /* test_key.p3skb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

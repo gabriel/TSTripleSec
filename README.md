@@ -35,9 +35,13 @@ NSData *decrypted = [tripleSec decrypt:encrypted key:key error:&error];
 
 # P3SKB
 
-[P3SKB](https://keybase.io/docs/api/1.0/p3skb_format) is a new format for storing encrypted keys thats better than PGP's method.
+[P3SKB](https://keybase.io/docs/api/1.0/p3skb_format) is a format for storing encrypted keys.
 
 ```objc
-NSData *privateKeyData = ...;
-P3SKB *privateKey = [P3SKB P3SKBWithKey:privateKeyData password:@"toomanysecrets" error:&error];
+NSData *privateKey = ...;
+NSData *publicKey = ...;
+P3SKB *key = [P3SKB P3SKBWithPrivateKey:privateKey password:@"toomanysecrets" publicKey:publicKey error:&error];
+
+// Create from serialized data
+P3SKB *key = [P3SKB P3SKBFromData:keyData error:&error];
 ```

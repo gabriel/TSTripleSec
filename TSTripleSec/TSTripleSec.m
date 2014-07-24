@@ -123,10 +123,10 @@
     return nil;
   }
   
-  if ([data length] < 232) {
-    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:203 userInfo:@{NSLocalizedDescriptionKey: @"This does not look like a TripleSec ciphertext"}];
-    return nil;
-  }
+//  if ([data length] < 232) {
+//    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:203 userInfo:@{NSLocalizedDescriptionKey: @"This does not look like a TripleSec ciphertext"}];
+//    return nil;
+//  }
   
   NSData *salt = [NSData na_dataNoCopy:data offset:offset length:16];
   offset += 16;

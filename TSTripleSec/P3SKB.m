@@ -11,30 +11,91 @@
 #import "TSTripleSec.h"
 
 #import <MPMessagePack/MPMessagePack.h>
+#import <MPMessagePack/MPOrderedDictionary.h>
 
 @interface P3SKB ()
-@property NSData *encryptedKey;
+@property NSData *encryptedPrivateKey;
+@property P3SKBEncryptionType encryptionType;
+@property NSData *publicKey;
 @end
 
 @implementation P3SKB
 
-+ (instancetype)P3SKBWithKey:(NSData *)key password:(NSString *)password error:(NSError * __autoreleasing *)error {
++ (instancetype)P3SKBWithPrivateKey:(NSData *)privateKey password:(NSString *)password publicKey:(NSData *)publicKey error:(NSError * __autoreleasing *)error {
   P3SKB *sk = [[P3SKB alloc] init];
-  if ([sk _setKey:key password:password error:error]) {
-    return sk;
+  sk.publicKey = publicKey;
+  sk.encryptionType = P3SKBEncryptionTypeTripleSec;
+  sk.encryptedPrivateKey = [sk _tripleSecEncryptPrivateKey:privateKey password:password error:error];
+  if (!sk.encryptedPrivateKey) {
+    return nil;
   }
-  return nil;
+  return sk;
 }
 
-- (BOOL)_setKey:(NSData *)key password:(NSString *)password error:(NSError * __autoreleasing *)error {
-  TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
-  _encryptedKey = [tripleSec encrypt:key key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
-  return !!_encryptedKey;
++ (instancetype)P3SKBWithEncryptedPrivateKey:(NSData *)encryptedPrivateKey encryptionType:(P3SKBEncryptionType)encryptionType publicKey:(NSData *)publicKey {
+  P3SKB *sk = [[P3SKB alloc] init];
+  sk.encryptedPrivateKey = encryptedPrivateKey;
+  sk.encryptionType = encryptionType;
+  sk.publicKey = publicKey;
+  return sk;
 }
 
-- (NSData *)key:(NSString *)password error:(NSError * __autoreleasing *)error {
++ (instancetype)P3SKBFromData:(NSData *)data error:(NSError * __autoreleasing *)error {
+  NSParameterAssert(data);
+  NSDictionary *dict = [MPMessagePackReader readData:data options:0 error:error];
+  if (!dict) return nil;
+  
+  NSInteger version = [dict[@"version"] integerValue];
+  if (version != 1) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1201 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported version"}];
+    return nil;
+  }
+  
+  NSDictionary *hash = dict[@"hash"];
+  NSInteger hashType = [hash[@"type"] integerValue];
+  if (hashType != 8) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1202 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported hash type"}];
+    return nil;
+  }
+  
+  // Check hash
+  NSData *hashData = hash[@"value"];
+  dict[@"hash"][@"value"] = [NSData data];
+  
+  NSData *hashDataComputed = [NADigest digestForData:[dict mp_messagePack:MPMessagePackWriterOptionsSortDictionaryKeys] algorithm:NADigestAlgorithmSHA256];
+  if (![hashDataComputed isEqual:hashData]) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1204 userInfo:@{NSLocalizedDescriptionKey: @"Invalid hash"}];
+    return nil;
+  }
+  
+  NSDictionary *body = dict[@"body"];
+  if (!body) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1205 userInfo:@{NSLocalizedDescriptionKey: @"Missing body"}];
+    return nil;
+  }
+  
+  NSDictionary *priv = body[@"priv"];
+  
+  NSInteger encryptionType = [priv[@"encryption"] integerValue];
+  if (encryptionType != 3) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1206 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported encryption type"}];
+    return nil;
+  }
+    
+  NSData *encryptedPrivateKey = priv[@"data"];
+  NSData *publicKey = body[@"pub"];
+  
+  if (!encryptedPrivateKey || !publicKey) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1207 userInfo:@{NSLocalizedDescriptionKey: @"Missing private or public key material"}];
+    return nil;
+  }
+  
+  return [self P3SKBWithEncryptedPrivateKey:encryptedPrivateKey encryptionType:P3SKBEncryptionTypeTripleSec publicKey:publicKey];
+}
+
+- (NSData *)_tripleSecEncryptPrivateKey:(NSData *)privateKey password:(NSString *)password error:(NSError * __autoreleasing *)error {
   TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
-  return [tripleSec decrypt:_encryptedKey key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
+  return [tripleSec encrypt:privateKey key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
 }
 
 - (NSData *)data {
@@ -42,6 +103,11 @@
   NSData *hashData = [NADigest digestForData:data algorithm:NADigestAlgorithmSHA256];
   
   return [self _P3SKBForHashData:hashData];
+}
+
+- (NSData *)decryptPrivateKeyWithPassword:(NSString *)password error:(NSError * __autoreleasing *)error {
+  TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
+  return [tripleSec decrypt:_encryptedPrivateKey key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
 }
 
 - (NSData *)_P3SKBForHashData:(NSData *)hashData {
@@ -52,14 +118,28 @@
       @"hash": @{
           @"type": @(8),
           @"value": hashData,
-          },
+        },
       @"body": @{
-          @"priv": _encryptedKey,
-          @"encryption": @(3),
-          }
+          @"priv": @{
+            @"data": _encryptedPrivateKey,
+            @"encryption": @(3),
+          },
+          @"pub": _publicKey,
+        }
       };
-  
-  return [dict mp_messagePack];
+  return [dict mp_messagePack:MPMessagePackWriterOptionsSortDictionaryKeys];
+}
+
+#pragma mark Equals/Hash
+
+- (BOOL)isEqual:(id)object {
+  return ([object isKindOfClass:[P3SKB class]] &&
+          [[object encryptedPrivateKey] isEqual:_encryptedPrivateKey] &&
+          [[object publicKey] isEqual:_publicKey]);
+}
+
+- (NSUInteger)hash {
+  return [_encryptedPrivateKey hash] ^ [_publicKey hash];
 }
 
 #pragma mark NSCoding
@@ -67,16 +147,12 @@
 + (BOOL)supportsSecureCoding { return YES; }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-  self = [super init];
-  if (!self) {
-    return nil;
-  }
-  self.encryptedKey = [decoder decodeObjectOfClass:[NSData class] forKey:@"encryptedKey"];
-  return self;
+  NSData *data = [decoder decodeObjectOfClass:[NSData class] forKey:@"data"];
+  return [P3SKB P3SKBFromData:data error:nil];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-  [encoder encodeObject:self.encryptedKey forKey:@"encryptedKey"];
+  [encoder encodeObject:[self data] forKey:@"data"];
 }
 
 @end

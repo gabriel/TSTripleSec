@@ -1,7 +1,7 @@
 PODS:
   - GHUnit (0.5.9)
-  - libsodium (0.6.0)
-  - MPMessagePack (0.1.3)
+  - libsodium (0.6.1)
+  - MPMessagePack (0.1.5)
   - NAChloride (1.0.8):
     - libsodium
 
@@ -12,8 +12,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   GHUnit: 4ea5a83295587ab226c458fc30dfdb1616fba633
-  libsodium: ec82e5dce7c83805c746afb563c0118e699ab723
-  MPMessagePack: 72e7de5c492c42323ac0193054ebcaed7d718e3c
+  libsodium: 4baff758d2e4b598e12641ea8f2e9ffc18c9fa0b
+  MPMessagePack: df720125236ce3b1dba2a67b38570a8189fb8b41
   NAChloride: 629fb7ecb3a35ee6f21a4d2e15462b9f87e5c4bd
 
 COCOAPODS: 0.33.1
