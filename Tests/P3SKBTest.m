@@ -33,16 +33,6 @@
   GHAssertEqualObjects(publicKey, keyOut.publicKey, nil);
 }
 
-- (void)testFileHex {
-  NSString *keyPath = [[NSBundle mainBundle] pathForResource:@"test_key" ofType:@"hex"];
-  NSString *keyStrData = [NSString stringWithContentsOfFile:keyPath encoding:NSUTF8StringEncoding error:NULL];
-  NSData *keyData = [keyStrData na_dataFromHexString];
-  
-  NSError *error = nil;
-  P3SKB *key = [P3SKB P3SKBFromData:keyData error:&error];
-  GHAssertNotNil(key, nil);
-}
-
 - (void)testFile {
   NSString *keyPath = [[NSBundle mainBundle] pathForResource:@"test_key" ofType:@"p3skb"];
   NSString *keyStrData = [NSString stringWithContentsOfFile:keyPath encoding:NSUTF8StringEncoding error:NULL];
