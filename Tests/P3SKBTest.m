@@ -2,50 +2,77 @@
 //  P3SKBTest.m
 //
 
-#import <GHUnit/GHUnit.h>
+#import <GRUnit/GRUnit.h>
 
 #import "P3SKB.h"
 #import <NAChloride/NAChloride.h>
 #import <MPMessagePack/MPMessagePack.h>
 
-@interface P3SKBTest : GHTestCase
+@interface P3SKBTest : GRTestCase
 @end
 
 @implementation P3SKBTest
+
+- (NSData *)loadBase64Data:(NSString *)file {
+  NSString *path = [[NSBundle mainBundle] pathForResource:[file stringByDeletingPathExtension] ofType:[file pathExtension]];
+  return [[NSData alloc] initWithBase64EncodedData:[[NSData alloc] initWithContentsOfFile:path] options:0];
+}
+
+- (NSString *)loadFile:(NSString *)file {
+  NSString *path = [[NSBundle mainBundle] pathForResource:[file stringByDeletingPathExtension] ofType:[file pathExtension]];
+  NSString *contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+  NSAssert(contents, @"No contents at file: %@", file);
+  return contents;
+}
 
 - (void)test {
   NSData *privateKey = [@"deadbeef" na_dataFromHexString];
   NSData *publicKey = [@"ff00ff00" na_dataFromHexString];
   P3SKB *key = [P3SKB P3SKBWithPrivateKey:privateKey password:@"toomanysecrets" publicKey:publicKey error:nil];
-  GHAssertNotNil(key, nil);
+  GRAssertNotNil(key);
   
   NSError *error = nil;
   NSData *decrypt = [key decryptPrivateKeyWithPassword:@"toomanysecrets" error:&error];
-  GHAssertEqualObjects(privateKey, decrypt, nil);
+  GRAssertEqualObjects(privateKey, decrypt);
   
   P3SKB *keyOut = [P3SKB P3SKBFromData:[key data] error:&error];
-  GHAssertNotNil(keyOut, nil);
+  GRAssertNotNil(keyOut);
   
   //NSLog(@"encryptedPrivateData: %@", [[keyOut encryptedPrivateKey] na_hexString]);
   
   NSData *privateKeyDataOut = [keyOut decryptPrivateKeyWithPassword:@"toomanysecrets" error:&error];
-  GHAssertEqualObjects(privateKey, privateKeyDataOut, nil);
-  GHAssertEqualObjects(publicKey, keyOut.publicKey, nil);
+  GRAssertEqualObjects(privateKey, privateKeyDataOut);
+  GRAssertEqualObjects(publicKey, keyOut.publicKey);
 }
 
 - (void)testFile {
-  NSString *keyPath = [[NSBundle mainBundle] pathForResource:@"test_key" ofType:@"p3skb"];
-  NSString *keyStrData = [NSString stringWithContentsOfFile:keyPath encoding:NSUTF8StringEncoding error:NULL];
-  NSData *keyData = [[NSData alloc] initWithBase64EncodedString:keyStrData options:0];
+  NSData *keyData = [self loadBase64Data:@"test_key.p3skb"];
 
   NSError *error = nil;
   P3SKB *key = [P3SKB P3SKBFromData:keyData error:&error];
-  GHAssertNotNil(key, nil);
+  GRAssertNotNil(key);
   
-  GHTestLog(@"publicKey: %@", [[NSString alloc] initWithData:key.publicKey encoding:NSUTF8StringEncoding]);
   NSData *unencryptedPrivateKey = [key decryptPrivateKeyWithPassword:@"Gj8vvokBfxC2xx" error:nil];
+  GRAssertNotNil(unencryptedPrivateKey);
+}
+
+- (void)testHexFile {
+  NSError *error = nil;
+  NSData *keyData = [[self loadFile:@"test_key_hex.p3skb"] na_dataFromHexString];
   
-  GHTestLog(@"unencryptedPrivateKey: %@", unencryptedPrivateKey);
+  NSMutableDictionary *dict = [MPMessagePackReader readData:keyData error:&error];
+  
+  dict[@"hash"][@"value"] = [dict[@"hash"][@"value"] base64EncodedStringWithOptions:0];
+  dict[@"body"][@"pub"] = [dict[@"body"][@"pub"] base64EncodedStringWithOptions:0];
+  dict[@"body"][@"priv"][@"data"] = [dict[@"body"][@"priv"][@"data"] base64EncodedStringWithOptions:0];
+  
+  GRTestLog(@"Dict: %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error] encoding:NSUTF8StringEncoding]);
+  
+  P3SKB *key = [P3SKB P3SKBFromData:keyData error:&error];
+  GRAssertNotNil(key);
+  
+  NSData *unencryptedPrivateKey = [key decryptPrivateKeyWithPassword:@"Gj8vvokBfxC2xx" error:nil];
+  GRAssertNotNil(unencryptedPrivateKey);
 }
 
 - (void)testNSCoding {
@@ -54,7 +81,7 @@
   P3SKB *key = [P3SKB P3SKBWithPrivateKey:privateKey password:@"toomanysecrets" publicKey:publicKey error:nil];
   NSData *data = [NSKeyedArchiver archivedDataWithRootObject:key];
   P3SKB *keyOut = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-  GHAssertEqualObjects(key, keyOut, nil);
+  GRAssertEqualObjects(key, keyOut);
 }
 
 @end

@@ -1,8 +1,8 @@
-platform :ios, '7.0'
+platform :ios, "7.0"
 
-pod 'NAChloride'
-pod 'MPMessagePack'#, :path => "../MPMessagePack"
+pod "NAChloride"#, :path => "../NAChloride"
+pod "MPMessagePack"#, :path => "../MPMessagePack"
 
 target :Tests do
-  pod 'GHUnit'
+  pod "GRUnit", "~> 1.0.1"
 end

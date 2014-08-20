@@ -1,12 +1,12 @@
 //
 //  TSEncryptTest.m
 //
-#import <GHUnit/GHUnit.h>
+#import <GRUnit/GRUnit.h>
 
 #import "TSTripleSec.h"
 #import <NAChloride/NAChloride.h>
 
-@interface TSTripleSecTest : GHTestCase
+@interface TSTripleSecTest : GRTestCase
 @end
 
 @implementation TSTripleSecTest
@@ -18,12 +18,12 @@
   NSError *error = nil;
   TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
   NSData *encrypted = [tripleSec encrypt:message key:key error:&error];
-  GHAssertNil(error, nil);
+  GRAssertNil(error);
   
   NSData *decrypted = [tripleSec decrypt:encrypted key:key error:&error];
-  GHAssertNil(error, nil);
+  GRAssertNil(error);
   
-  GHAssertEqualObjects(message, decrypted, nil);
+  GRAssertEqualObjects(message, decrypted);
 }
 
 - (void)testDecrypt {
@@ -35,10 +35,10 @@
   NSError *error = nil;
   TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
   NSData *decrypted = [tripleSec decrypt:encrypted key:key error:&error];
-  GHAssertNil(error, nil);
+  GRAssertNil(error);
   
   NSData *message = [@"this is a really secret message" dataUsingEncoding:NSUTF8StringEncoding];
-  GHAssertEqualObjects(message, decrypted, nil);
+  GRAssertEqualObjects(message, decrypted);
 }
 
 // TODO
@@ -58,8 +58,8 @@
     //NSData *encrypted = [tripleSec encrypt:plaintext key:key error:&error];
     //GHAssertNil(error, nil);
     NSData *decrypted = [tripleSec decrypt:ciphertext key:key error:&error];
-    GHAssertNil(error, nil);
-    GHAssertEqualObjects(plaintext, decrypted, nil);
+    GRAssertNil(error);
+    GRAssertEqualObjects(plaintext, decrypted);
   }
 }
 
