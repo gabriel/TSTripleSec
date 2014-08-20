@@ -40,6 +40,15 @@
   return sk;
 }
 
++ (instancetype)P3SKBFromKeyBundle:(NSString *)keyBundle error:(NSError * __autoreleasing *)error {
+  NSData *data = [[NSData alloc] initWithBase64EncodedString:keyBundle options:0];
+  if (!data) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1200 userInfo:@{NSLocalizedDescriptionKey: @"Invalid Base64 encoding"}];
+    return nil;
+  }
+  return [self P3SKBFromData:data error:error];
+}
+
 + (instancetype)P3SKBFromData:(NSData *)data error:(NSError * __autoreleasing *)error {
   NSParameterAssert(data);
   NSDictionary *dict = [MPMessagePackReader readData:data options:0 error:error];
@@ -81,7 +90,7 @@
     if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1206 userInfo:@{NSLocalizedDescriptionKey: @"Unsupported encryption type"}];
     return nil;
   }
-    
+  
   NSData *encryptedPrivateKey = priv[@"data"];
   NSData *publicKey = body[@"pub"];
   
@@ -105,6 +114,10 @@
   return [self _P3SKBForHashData:hashData];
 }
 
+- (NSString *)keyBundle {
+  return [[self data] base64EncodedStringWithOptions:0];
+}
+
 - (NSData *)decryptPrivateKeyWithPassword:(NSString *)password error:(NSError * __autoreleasing *)error {
   TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
   return [tripleSec decrypt:_encryptedPrivateKey key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
@@ -112,21 +125,21 @@
 
 - (NSData *)_P3SKBForHashData:(NSData *)hashData {
   NSDictionary *dict =
-    @{
-      @"version": @(1),
-      @"tag": @(513),
-      @"hash": @{
-          @"type": @(8),
-          @"value": hashData,
+  @{
+    @"version": @(1),
+    @"tag": @(513),
+    @"hash": @{
+        @"type": @(8),
+        @"value": hashData,
         },
-      @"body": @{
-          @"priv": @{
+    @"body": @{
+        @"priv": @{
             @"data": _encryptedPrivateKey,
             @"encryption": @(3),
-          },
-          @"pub": _publicKey,
+            },
+        @"pub": _publicKey,
         }
-      };
+    };
   return [dict mp_messagePack:MPMessagePackWriterOptionsSortDictionaryKeys];
 }
 
