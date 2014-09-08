@@ -71,7 +71,7 @@
   NSData *hashData = hash[@"value"];
   dict[@"hash"][@"value"] = [NSData data];
   
-  NSData *hashDataComputed = [NADigest digestForData:[dict mp_messagePack:MPMessagePackWriterOptionsSortDictionaryKeys] algorithm:NADigestAlgorithmSHA256];
+  NSData *hashDataComputed = [NADigest digestForData:[dict mp_messagePack:MPMessagePackWriterOptionsSortDictionaryKeys] algorithm:NADigestAlgorithmSHA2_256];
   if (![hashDataComputed isEqual:hashData]) {
     if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1204 userInfo:@{NSLocalizedDescriptionKey: @"Invalid hash"}];
     return nil;
@@ -109,7 +109,7 @@
 
 - (NSData *)data {
   NSData *data = [self _P3SKBForHashData:[NSData data]];
-  NSData *hashData = [NADigest digestForData:data algorithm:NADigestAlgorithmSHA256];
+  NSData *hashData = [NADigest digestForData:data algorithm:NADigestAlgorithmSHA2_256];
   
   return [self _P3SKBForHashData:hashData];
 }

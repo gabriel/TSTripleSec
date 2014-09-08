@@ -90,7 +90,7 @@
   
   NSData *authenticatedData = [NSData na_dataWithDatas:@[header, salt, encryptedMaterial]];
   
-  NAHMAC *hmac1 = [[NAHMAC alloc] initWithAlgorithm:NAHMACAlgorithmSHA512];
+  NAHMAC *hmac1 = [[NAHMAC alloc] initWithAlgorithm:NAHMACAlgorithmSHA2_512];
   NSData *mac1 = [hmac1 HMACForKey:HMACSHA512Key data:authenticatedData];
   
   NAHMAC *hmac2 = [[NAHMAC alloc] initWithAlgorithm:NAHMACAlgorithmSHA3_512];
@@ -147,7 +147,7 @@
   
   NSData *authenticatedData = [NSData na_dataWithDatas:@[header, salt, encryptedMaterial]];
   
-  NAHMAC *hmac1 = [[NAHMAC alloc] initWithAlgorithm:NAHMACAlgorithmSHA512];
+  NAHMAC *hmac1 = [[NAHMAC alloc] initWithAlgorithm:NAHMACAlgorithmSHA2_512];
   NSData *genMac1 = [hmac1 HMACForKey:HMACSHA512Key data:authenticatedData];
   
   NAHMAC *hmac2 = [[NAHMAC alloc] initWithAlgorithm:NAHMACAlgorithmSHA3_512];
