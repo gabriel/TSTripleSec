@@ -22,6 +22,11 @@
 @implementation P3SKB
 
 + (instancetype)P3SKBWithPrivateKey:(NSData *)privateKey password:(NSString *)password publicKey:(NSData *)publicKey error:(NSError * __autoreleasing *)error {
+  if (!password) {
+    [NSException raise:NSInvalidArgumentException format:@"Can't create P3SKB with no password"];
+    return nil;
+  }
+              
   P3SKB *sk = [[P3SKB alloc] init];
   sk.publicKey = publicKey;
   sk.encryptionType = P3SKBEncryptionTypeTripleSec;
@@ -51,8 +56,16 @@
 
 + (instancetype)P3SKBFromData:(NSData *)data error:(NSError * __autoreleasing *)error {
   NSParameterAssert(data);
-  NSDictionary *dict = [MPMessagePackReader readData:data options:0 error:error];
-  if (!dict) return nil;
+  id obj = [MPMessagePackReader readData:data options:0 error:error];
+  if (![obj isKindOfClass:NSDictionary.class]) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1201 userInfo:@{NSLocalizedDescriptionKey: @"Invalid data"}];
+    return nil;
+  }
+  NSDictionary *dict = obj;
+  if (!dict) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:1201 userInfo:@{NSLocalizedDescriptionKey: @"Invalid data"}];
+    return nil;
+  }
   
   NSInteger version = [dict[@"version"] integerValue];
   if (version != 1) {

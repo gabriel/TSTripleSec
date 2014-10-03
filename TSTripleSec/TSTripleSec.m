@@ -156,8 +156,12 @@
   BOOL checkMac1 = [mac1 na_isEqualConstantTime:genMac1];
   BOOL checkMac2 = [mac2 na_isEqualConstantTime:genMac2];
   
-  if (!checkMac1 || !checkMac2) {
-    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:204 userInfo:@{NSLocalizedDescriptionKey: @"Failed authentication"}];
+  if (!checkMac1) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:204 userInfo:@{NSLocalizedDescriptionKey: @"Failed authentication (HMAC-SHA2_512)"}];
+    return nil;
+  }
+  if (!checkMac2) {
+    if (error) *error = [NSError errorWithDomain:@"TripleSec" code:204 userInfo:@{NSLocalizedDescriptionKey: @"Failed authentication (HMAC-SHA3_512)"}];
     return nil;
   }
   
