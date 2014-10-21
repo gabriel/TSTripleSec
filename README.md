@@ -3,7 +3,7 @@ TSTripleSec
 
 Objective-C implementation for [TripleSec](https://keybase.io/triplesec). 
 
-TripleSec is a triple-paranoid symmetric encryption so that a failure in one or two ciphers won't comprimise the data.
+TripleSec is a triple-paranoid symmetric encryption so that a failure in one or two ciphers won't compromise the data.
 
 See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details on crypto implementations used here.
 
