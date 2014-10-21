@@ -1,4 +1,4 @@
-TripleSec
+TSTripleSec
 ===========
 
 Objective-C implementation for [TripleSec](https://keybase.io/triplesec). 
@@ -6,6 +6,8 @@ Objective-C implementation for [TripleSec](https://keybase.io/triplesec).
 TripleSec is a triple-paranoid symmetric encryption so that a failure in one or two ciphers won't comprimise the data.
 
 See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details on crypto implementations used here.
+
+TSTripleSec uses [gabriel/GRUnit](https://github.com/gabriel/GRUnit) for unit testing.
 
 # Install
 
