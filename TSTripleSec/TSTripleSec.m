@@ -23,6 +23,13 @@
 
 @implementation TSTripleSec
 
+- (instancetype)init {
+  if ((self = [super init])) {
+    NAChlorideInit();
+  }
+  return self;
+}
+
 - (TSTripleSecKeys *)keysForKey:(NSData *)key salt:(NSData *)salt error:(NSError * __autoreleasing *)error {
   NSUInteger totalKeysBytes = HMAC_SHA_512_KEYSIZE + HMAC_SHA3_512_KEYSIZE + XSALSA20_KEYSIZE + TWO_FISH_CTR_KEYSIZE + AES_256_CTR_KEYSIZE;
   NSData *keyMaterial = [NAScrypt scrypt:key salt:salt N:32768U r:8 p:1 length:totalKeysBytes error:error];
