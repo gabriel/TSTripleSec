@@ -84,4 +84,15 @@
   GRAssertEqualObjects(key, keyOut);
 }
 
+- (void)testChangePassword {
+  NSData *keyData = [self loadBase64Data:@"test_key.p3skb"];
+  P3SKB *key = [P3SKB P3SKBFromData:keyData error:nil];
+  NSData *unencryptedPrivateKey1 = [key decryptPrivateKeyWithPassword:@"Gj8vvokBfxC2xx" error:nil];
+  
+  [key changeFromPassword:@"Gj8vvokBfxC2xx" toPassword:@"otherpassword" error:nil];
+  
+  NSData *unencryptedPrivateKey2 = [key decryptPrivateKeyWithPassword:@"otherpassword" error:nil];
+  GRAssertEqualObjects(unencryptedPrivateKey1, unencryptedPrivateKey2);
+}
+
 @end

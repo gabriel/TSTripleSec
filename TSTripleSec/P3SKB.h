@@ -12,7 +12,7 @@ typedef NS_ENUM (NSUInteger, P3SKBEncryptionType) {
   P3SKBEncryptionTypeTripleSec = 3,
 };
 
-@interface P3SKB : NSObject <NSSecureCoding>
+@interface P3SKB : NSObject <NSSecureCoding, NSCopying>
 
 @property (readonly) NSData *publicKey;
 @property (readonly) NSData *encryptedPrivateKey;
@@ -55,13 +55,17 @@ typedef NS_ENUM (NSUInteger, P3SKBEncryptionType) {
  */
 + (instancetype)P3SKBFromKeyBundle:(NSString *)keyBundle error:(NSError * __autoreleasing *)error;
 
-
 /*!
  Decrypt private key.
  @param password
  @result Unecrypted key or nil if invalid password
  */
 - (NSData *)decryptPrivateKeyWithPassword:(NSString *)password error:(NSError * __autoreleasing *)error;
+
+/*!
+ Change password.
+ */
+- (BOOL)changeFromPassword:(NSString *)fromPassword toPassword:(NSString *)toPassword error:(NSError * __autoreleasing *)error;
 
 /*!
  Data (Message-packed encrypted TripleSec).

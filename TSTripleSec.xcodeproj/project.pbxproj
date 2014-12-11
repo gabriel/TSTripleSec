@@ -12,6 +12,8 @@
 		000A2059195B91B100BC626B /* vectors.json in Resources */ = {isa = PBXBuildFile; fileRef = 000A2057195B904500BC626B /* vectors.json */; };
 		002B4F8A19817CE100DB27E0 /* test_key_hex.p3skb in Resources */ = {isa = PBXBuildFile; fileRef = 002B4F8919817CE100DB27E0 /* test_key_hex.p3skb */; };
 		0057EDFB196C945400F39536 /* test_key.p3skb in Resources */ = {isa = PBXBuildFile; fileRef = 0057EDFA196C945400F39536 /* test_key.p3skb */; };
+		00A1790A19E5DB4F0012DBE0 /* P3SKBValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A1790919E5DB4F0012DBE0 /* P3SKBValueTransformer.m */; };
+		00A1790B19E5DB4F0012DBE0 /* P3SKBValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A1790919E5DB4F0012DBE0 /* P3SKBValueTransformer.m */; };
 		00E14E9D195525A0003CAE8E /* TSTripleSec.m in Sources */ = {isa = PBXBuildFile; fileRef = 00095BA01954C8BF00F550CB /* TSTripleSec.m */; };
 		00FB32B1196610640060AF33 /* P3SKB.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FB32B0196610640060AF33 /* P3SKB.m */; };
 		00FB32B2196610640060AF33 /* P3SKB.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FB32B0196610640060AF33 /* P3SKB.m */; };
@@ -58,6 +60,8 @@
 		002B4F8919817CE100DB27E0 /* test_key_hex.p3skb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_key_hex.p3skb; path = Tests/test_key_hex.p3skb; sourceTree = "<group>"; };
 		0057EDFA196C945400F39536 /* test_key.p3skb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_key.p3skb; path = Tests/test_key.p3skb; sourceTree = "<group>"; };
 		0057EDFC196CA48100F39536 /* CHANGES */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES; sourceTree = "<group>"; };
+		00A1790819E5DB4F0012DBE0 /* P3SKBValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P3SKBValueTransformer.h; sourceTree = "<group>"; };
+		00A1790919E5DB4F0012DBE0 /* P3SKBValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P3SKBValueTransformer.m; sourceTree = "<group>"; };
 		00FB32AF196610640060AF33 /* P3SKB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P3SKB.h; sourceTree = "<group>"; };
 		00FB32B0196610640060AF33 /* P3SKB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P3SKB.m; sourceTree = "<group>"; };
 		00FB32BB196617620060AF33 /* P3SKBTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = P3SKBTest.m; path = Tests/P3SKBTest.m; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 				00095BA01954C8BF00F550CB /* TSTripleSec.m */,
 				00FB32AF196610640060AF33 /* P3SKB.h */,
 				00FB32B0196610640060AF33 /* P3SKB.m */,
+				00A1790819E5DB4F0012DBE0 /* P3SKBValueTransformer.h */,
+				00A1790919E5DB4F0012DBE0 /* P3SKBValueTransformer.m */,
 			);
 			path = TSTripleSec;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00FB32B1196610640060AF33 /* P3SKB.m in Sources */,
+				00A1790A19E5DB4F0012DBE0 /* P3SKBValueTransformer.m in Sources */,
 				00FB32BC196617620060AF33 /* P3SKBTest.m in Sources */,
 				00095BA11954C8BF00F550CB /* TSTripleSec.m in Sources */,
 			);
@@ -329,6 +336,7 @@
 				00FB32BD196617620060AF33 /* P3SKBTest.m in Sources */,
 				54DD97C057344820A1079424 /* main.m in Sources */,
 				B40CA0C17DC34E73990A8D07 /* TSTripleSecTest.m in Sources */,
+				00A1790B19E5DB4F0012DBE0 /* P3SKBValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

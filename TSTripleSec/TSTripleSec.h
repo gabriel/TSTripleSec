@@ -10,6 +10,7 @@
 
 #import <NAChloride/NAChloride.h>
 #import "P3SKB.h"
+#import "P3SKBValueTransformer.h"
 
 
 @interface TSTripleSec : NSObject <NACryptoBox>
@@ -32,5 +33,8 @@
  */
 - (NSData *)decrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
 
+// Class Alias
++ (NSData *)encrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
++ (NSData *)decrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
 
 @end

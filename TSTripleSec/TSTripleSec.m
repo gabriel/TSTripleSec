@@ -191,4 +191,14 @@
   return decrypted;
 }
 
++ (NSData *)encrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error {
+  TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
+  return [tripleSec encrypt:data key:key error:error];
+}
+
++ (NSData *)decrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error {
+  TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
+  return [tripleSec decrypt:data key:key error:error];
+}
+
 @end

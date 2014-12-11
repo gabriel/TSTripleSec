@@ -30,7 +30,7 @@
   P3SKB *sk = [[P3SKB alloc] init];
   sk.publicKey = publicKey;
   sk.encryptionType = P3SKBEncryptionTypeTripleSec;
-  sk.encryptedPrivateKey = [sk _tripleSecEncryptPrivateKey:privateKey password:password error:error];
+  sk.encryptedPrivateKey = [sk _encryptPrivateKey:privateKey password:password error:error];
   if (!sk.encryptedPrivateKey) {
     return nil;
   }
@@ -115,7 +115,7 @@
   return [self P3SKBWithEncryptedPrivateKey:encryptedPrivateKey encryptionType:P3SKBEncryptionTypeTripleSec publicKey:publicKey];
 }
 
-- (NSData *)_tripleSecEncryptPrivateKey:(NSData *)privateKey password:(NSString *)password error:(NSError * __autoreleasing *)error {
+- (NSData *)_encryptPrivateKey:(NSData *)privateKey password:(NSString *)password error:(NSError * __autoreleasing *)error {
   TSTripleSec *tripleSec = [[TSTripleSec alloc] init];
   return [tripleSec encrypt:privateKey key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
 }
@@ -136,6 +136,16 @@
   return [tripleSec decrypt:_encryptedPrivateKey key:[password dataUsingEncoding:NSUTF8StringEncoding] error:error];
 }
 
+- (BOOL)changeFromPassword:(NSString *)fromPassword toPassword:(NSString *)toPassword error:(NSError * __autoreleasing *)error {
+  NSData *data = [self decryptPrivateKeyWithPassword:fromPassword error:error];
+  if (!data) return NO;
+  data = [self _encryptPrivateKey:data password:toPassword error:error];
+  if (!data) return NO;
+  NSAssert(_encryptedPrivateKey != data, @"Unchanged");
+  _encryptedPrivateKey = data;
+  return YES;
+}
+
 - (NSData *)_P3SKBForHashData:(NSData *)hashData {
   NSDictionary *dict =
   @{
@@ -154,6 +164,15 @@
         }
     };
   return [dict mp_messagePack:MPMessagePackWriterOptionsSortDictionaryKeys];
+}
+
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone {
+  P3SKB *skb = [[self.class alloc] init];
+  skb.publicKey = [_publicKey copy];
+  skb.encryptedPrivateKey = [_encryptedPrivateKey copy];
+  return skb;
 }
 
 #pragma mark Equals/Hash
