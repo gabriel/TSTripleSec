@@ -9,11 +9,7 @@ See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details
 
 TSTripleSec uses [gabriel/GRUnit](https://github.com/gabriel/GRUnit) for unit testing.
 
-# Install
-
-[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries in your projects.
-
-## Podfile
+# Podfile
 
 ```ruby
 platform :ios, "7.0"
