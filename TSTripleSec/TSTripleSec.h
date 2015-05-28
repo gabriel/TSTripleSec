@@ -13,7 +13,7 @@
 #import "P3SKBValueTransformer.h"
 
 
-@interface TSTripleSec : NSObject <NACryptoBox>
+@interface TSTripleSec : NSObject
 
 /*!
  Encypt data with key.

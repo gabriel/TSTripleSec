@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "TSTripleSec"
-  s.version      = "1.0.2"
+  s.version      = "1.0.4"
   s.summary      = "Objective-C library for TripleSec"
   s.homepage     = "https://github.com/gabriel/TSTripleSec"
   s.license      = { :type => "MIT" }
