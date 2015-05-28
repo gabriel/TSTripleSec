@@ -4,7 +4,7 @@ PODS:
   - libsodium (1.0.2)
   - MPMessagePack (1.1.21):
     - GHODictionary
-  - NAChloride (1.1.2):
+  - NAChloride (1.2.16):
     - libsodium
 
 DEPENDENCIES:
@@ -18,6 +18,6 @@ SPEC CHECKSUMS:
   GRUnit: 45fb5975621f8e6b468c76201f67ede3caf06181
   libsodium: d1b482e7628e0298de350375a4ab981b5cc8c71b
   MPMessagePack: 5cafc8ed00fc405ad1d4255116666f6b1e6ae026
-  NAChloride: acfc82321c23b57d169b46c587c1d92147aafedf
+  NAChloride: 305190f98543ac32925e8aa3d9bc98734972ad24
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2
