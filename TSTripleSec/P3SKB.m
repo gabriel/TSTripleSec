@@ -11,7 +11,7 @@
 #import "TSTripleSec.h"
 
 #import <MPMessagePack/MPMessagePack.h>
-#import <MPMessagePack/MPOrderedDictionary.h>
+#import <GHODictionary/GHODictionary.h>
 
 @interface P3SKB ()
 @property NSData *encryptedPrivateKey;
