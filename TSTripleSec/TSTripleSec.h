@@ -1,40 +1,21 @@
 //
 //  TSTripleSec.h
-//  TripleSec
+//  TSTripleSec
 //
-//  Created by Gabriel on 6/20/14.
-//  Copyright (c) 2014 Gabriel Handford. All rights reserved.
+//  Created by Gabriel on 6/16/15.
+//  Copyright (c) 2015 Gabriel Handford. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
-#import <NAChloride/NAChloride.h>
-#import "P3SKB.h"
-#import "P3SKBValueTransformer.h"
+//! Project version number for TSTripleSec.
+FOUNDATION_EXPORT double TSTripleSecVersionNumber;
+
+//! Project version string for TSTripleSec.
+FOUNDATION_EXPORT const unsigned char TSTripleSecVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <TSTripleSec/PublicHeader.h>
 
 
-@interface TSTripleSec : NSObject
-
-/*!
- Encypt data with key.
- @param data
- @param key
- @param error Out error
- @result Encrypted data or nil on error
- */
-- (NSData *)encrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
-
-/*!
- Decrypt data with key.
- @param data
- @param key
- @param error Out error
- @result Decrypted data or nil on error
- */
-- (NSData *)decrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
-
-// Class Alias
-+ (NSData *)encrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
-+ (NSData *)decrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error;
-
-@end
+#import <TSTripleSec/TRSTripleSec.h>
+#import <TSTripleSec/P3SKB.h>

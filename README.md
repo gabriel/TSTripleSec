@@ -7,12 +7,9 @@ TripleSec is a triple-paranoid symmetric encryption so that a failure in one or 
 
 See [gabriel/NAChloride](https://github.com/gabriel/NAChloride) for more details on crypto implementations used here.
 
-TSTripleSec uses [gabriel/GRUnit](https://github.com/gabriel/GRUnit) for unit testing.
-
 # Podfile
 
 ```ruby
-platform :ios, "7.0"
 pod "TSTripleSec"
 ```
 

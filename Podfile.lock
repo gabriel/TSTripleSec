@@ -1,23 +1,23 @@
 PODS:
   - GHODictionary (1.0.7)
-  - GRUnit (1.0.14)
-  - libsodium (1.0.2)
+  - libsodium (1.0.3)
   - MPMessagePack (1.1.21):
     - GHODictionary
-  - NAChloride (1.2.16):
+  - NAChloride (2.0.0):
     - libsodium
+  - NACrypto (1.0.1)
 
 DEPENDENCIES:
   - GHODictionary
-  - GRUnit (~> 1.0.1)
   - MPMessagePack
   - NAChloride
+  - NACrypto
 
 SPEC CHECKSUMS:
   GHODictionary: 993689351856664fea250da963bfd63fc624ca48
-  GRUnit: 45fb5975621f8e6b468c76201f67ede3caf06181
-  libsodium: d1b482e7628e0298de350375a4ab981b5cc8c71b
+  libsodium: be547e31dc75725629acc5717dc0a40fc05ef243
   MPMessagePack: 5cafc8ed00fc405ad1d4255116666f6b1e6ae026
-  NAChloride: 305190f98543ac32925e8aa3d9bc98734972ad24
+  NAChloride: 461b8f35eafb6fbfbad36572d554f41535eae776
+  NACrypto: c8c75cb91eb3327e9726f361aae61d349f2e8158
 
 COCOAPODS: 0.37.2

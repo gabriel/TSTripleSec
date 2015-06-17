@@ -10,6 +10,7 @@
 
 #import "TSTripleSec.h"
 
+#import <NACrypto/NACrypto.h>
 #import <MPMessagePack/MPMessagePack.h>
 #import <GHODictionary/GHODictionary.h>
 

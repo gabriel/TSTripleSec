@@ -8,6 +8,9 @@
 
 #import "TSTripleSec.h"
 
+#import <NAChloride/NAChloride.h>
+#import <NACrypto/NACrypto.h>
+
 #define HMAC_SHA_512_KEYSIZE (48)
 #define HMAC_SHA3_512_KEYSIZE (48)
 #define XSALSA20_KEYSIZE (32)
@@ -59,7 +62,7 @@
 }
 
 - (NSData *)encrypt:(NSData *)data key:(NSData *)key error:(NSError * __autoreleasing *)error {
-  NSData *salt = [NARandom randomData:16 error:error];
+  NSData *salt = [NARandom randomData:16];
   if (!salt) return nil;
   
   TSTripleSecKeys *keys = [self keysForKey:key salt:salt error:error];
@@ -70,21 +73,21 @@
   NSData *twoFishKey = keys.cipherKeys[1];
   NSData *AESKey = keys.cipherKeys[2];
   
-  NSData *XSalsa20Nonce = [NARandom randomData:24 error:error];
+  NSData *XSalsa20Nonce = [NARandom randomData:24];
   if (!XSalsa20Nonce) return nil;
   NAXSalsa20 *XSalsa20 = [[NAXSalsa20 alloc] init];
   data = [XSalsa20 encrypt:data nonce:XSalsa20Nonce key:XSalsa20Key error:error];
   if (!data) return nil;
   data = [NSData na_dataWithDatas:@[XSalsa20Nonce, data]];
   
-  NSData *twoFishNonce = [NARandom randomData:16 error:error];
+  NSData *twoFishNonce = [NARandom randomData:16];
   if (!twoFishNonce) return nil;
   NATwoFish *twoFish = [[NATwoFish alloc] init];
   data = [twoFish encrypt:data nonce:twoFishNonce key:twoFishKey error:error];
   if (!data) return nil;
   data = [NSData na_dataWithDatas:@[twoFishNonce, data]];
   
-  NSData *AESNonce = [NARandom randomData:16 error:error];
+  NSData *AESNonce = [NARandom randomData:16];
   if (!AESNonce) return nil;
   NAAES *AES = [[NAAES alloc] initWithAlgorithm:NAAESAlgorithm256CTR];
   data = [AES encrypt:data nonce:AESNonce key:AESKey error:error];

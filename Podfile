@@ -1,9 +1,8 @@
-platform :ios, "7.0"
+target "TSTripleSec" do
+  platform :osx, "10.8"
 
-pod "NAChloride"
-pod "MPMessagePack"
-pod "GHODictionary"
-
-target :Tests do
-  pod "GRUnit", "~> 1.0.1"
+  pod "NAChloride"
+  pod "NACrypto"
+  pod "MPMessagePack"
+  pod "GHODictionary"
 end
