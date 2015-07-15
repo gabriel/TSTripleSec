@@ -75,8 +75,8 @@
   
   NSData *XSalsa20Nonce = [NARandom randomData:24];
   if (!XSalsa20Nonce) return nil;
-  NAXSalsa20 *XSalsa20 = [[NAXSalsa20 alloc] init];
-  data = [XSalsa20 encrypt:data nonce:XSalsa20Nonce key:XSalsa20Key error:error];
+  NAStream *XSalsa20 = [[NAStream alloc] init];
+  data = [XSalsa20 xor:data nonce:XSalsa20Nonce key:XSalsa20Key error:error];
   if (!data) return nil;
   data = [NSData na_dataWithDatas:@[XSalsa20Nonce, data]];
   
@@ -192,8 +192,8 @@
   NSData *XSalsa20Nonce = nil;
   NSData *XSalsa20Data = nil;
   [encryptedMaterial na_sliceNoCopyAtIndex:24 data:&XSalsa20Nonce data:&XSalsa20Data];
-  NAXSalsa20 *XSalsa20 = [[NAXSalsa20 alloc] init];
-  encryptedMaterial = [XSalsa20 encrypt:XSalsa20Data nonce:XSalsa20Nonce key:XSalsa20Key error:error];
+  NAStream *XSalsa20 = [[NAStream alloc] init];
+  encryptedMaterial = [XSalsa20 xor:XSalsa20Data nonce:XSalsa20Nonce key:XSalsa20Key error:error];
   if (!encryptedMaterial) return nil;
   
   NSData *decrypted = encryptedMaterial;
